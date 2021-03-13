@@ -45,6 +45,10 @@
 
               <nuxt-link exact active-class="active" class="menu__link" to="/">Home</nuxt-link>
               <nuxt-link no-prefetch active-class="active" class="menu__link" to="/about">About</nuxt-link>
+              <nuxt-link active-class="active" class="menu__link" to="/users">Users</nuxt-link>
+
+              <nuxt-link v-if="!hasToken" active-class="active" class="menu__link" to="/login">Login</nuxt-link>
+              <a href="#" v-else @click.prevent="logout" class="menu__link">Logout</a>
             </div>
           </div>
         </div>
@@ -89,7 +93,7 @@
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Your
                 Profile</a>
               <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Settings</a>
-              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
+              <a href="#"  class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem">Sign out</a>
             </div>
           </div>
         </div>
@@ -113,13 +117,28 @@
 
 </template>
 
-<style lang="scss">
+<script>
+import { mapGetters } from 'vuex'
+export default {
+  computed: {
+    ...mapGetters(['hasToken'])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('logout')
+      this.$router.push('/login')
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
 .menu__link {
-  @apply bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium
+  @apply bg-transparent text-white px-3 py-2 rounded-md text-sm font-medium
 }
 .menu__link {
   &.active {
-    @apply bg-transparent text-yellow-100
+    @apply bg-gray-900
   }
 }
 </style>

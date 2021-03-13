@@ -15,6 +15,11 @@ export default {
     ]
   },
 
+  loading: {
+    color: 'blue',
+    height: '5px'
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
@@ -29,6 +34,7 @@ export default {
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/axios',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
